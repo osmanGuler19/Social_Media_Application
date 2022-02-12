@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'view/login_view.dart';
 import 'package:provider/provider.dart';
 import 'viewmodel/user_viewmodel.dart';
+import 'viewmodel/post_viewmodel.dart';
 import 'view/login_view.dart';
 import 'view/homepage_view.dart';
 
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<UserViewModel>(create: (_) => UserViewModel()),
+        ChangeNotifierProvider<PostViewModel>(create: (_) => PostViewModel()),
       ],
       child: MaterialApp(
         title: 'GrandStack Flutter',
