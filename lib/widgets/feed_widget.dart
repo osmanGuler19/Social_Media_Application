@@ -1,19 +1,17 @@
+import 'package:feed_app/view/post_detail_view.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import '../model/user_model.dart';
+import '../model/post_model.dart';
 import '../viewmodel/user_viewmodel.dart';
 import 'package:provider/provider.dart';
+import '../view/user_detail_view.dart';
+import '../view/post_detail_view.dart';
 
 class FeedWidget extends StatelessWidget {
-  final String userImagePath;
-  final String userName;
-  final String userPost;
-  final int userId;
-  const FeedWidget(
-      {Key? key,
-      required this.userImagePath,
-      required this.userName,
-      required this.userPost,
-      required this.userId})
+  final Post post;
+  final User usr;
+  const FeedWidget({Key? key, required this.post, required this.usr})
       : super(key: key);
 
   @override
@@ -25,28 +23,33 @@ class FeedWidget extends StatelessWidget {
       ),
       child: ListTile(
         onTap: () {
-          Fluttertoast.showToast(
-            msg: "Tap on $userName",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.grey,
-            textColor: Colors.white,
-            fontSize: 16.0,
-          );
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => PostDetail(
+                        post: post,
+                        usr: usr,
+                      )));
         },
         leading: GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => UserDetail(
+                          user: usr,
+                        )));
+          },
           child: CircleAvatar(
             backgroundImage: AssetImage(
-              userImagePath,
+              "assets/images/user_${usr.id}.jpeg",
             ),
           ),
         ),
-        title: Text(userName),
-        subtitle: Text(userPost.length > 100
-            ? '${userPost.substring(0, 100)}...'
-            : userPost),
+        title: Text("${usr.name}"),
+        subtitle: Text(post.body!.length > 100
+            ? '${post.body!.substring(0, 100)}...'
+            : post.body!),
       ),
     );
   }

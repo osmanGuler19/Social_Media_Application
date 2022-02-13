@@ -44,12 +44,8 @@ class HomePage extends StatelessWidget {
                       final post_vm = postViewModel.currentPostList[index];
                       final user_vm = postViewModel.currentPostsUser[index];
                       return FeedWidget(
-                        userImagePath:
-                            "assets/images/user_${post_vm.userId}.jpeg",
-                        userName: "${user_vm.name}",
-                        userPost:
-                            "${postViewModel.currentPostList[index].body}",
-                        userId: post_vm.userId!,
+                        post: post_vm,
+                        usr: user_vm,
                       );
                     },
                     loadingWidget: Center(
