@@ -28,7 +28,7 @@ class UserDetail extends StatelessWidget {
             Card(
               elevation: 10,
               child: Text(
-                "User Name : " + user.name.toString(),
+                "Name : " + user.name.toString(),
                 style: TextStyle(
                   fontSize: 20,
                 ),
@@ -40,7 +40,19 @@ class UserDetail extends StatelessWidget {
             Card(
               elevation: 10,
               child: Text(
-                "User Email : " + user.email.toString(),
+                "UserName : " + user.username.toString(),
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Card(
+              elevation: 10,
+              child: Text(
+                "Email : " + user.email.toString(),
                 style: TextStyle(fontSize: 20),
               ),
             ),
@@ -50,7 +62,7 @@ class UserDetail extends StatelessWidget {
             Card(
               elevation: 10,
               child: Text(
-                "User Phone : " + user.phone.toString(),
+                "Phone : " + user.phone.toString(),
                 style: TextStyle(fontSize: 20),
               ),
             ),
@@ -60,7 +72,7 @@ class UserDetail extends StatelessWidget {
             Card(
               elevation: 10,
               child: Text(
-                "User Address : " + user.address.toString(),
+                "Address : " + user.address.toString(),
                 style: TextStyle(fontSize: 20),
               ),
             ),
@@ -70,7 +82,7 @@ class UserDetail extends StatelessWidget {
             Card(
               elevation: 10,
               child: Text(
-                "User Company : " + user.company.toString(),
+                "Company : " + user.company.toString(),
                 style: TextStyle(fontSize: 20),
               ),
             ),
@@ -80,7 +92,7 @@ class UserDetail extends StatelessWidget {
             Card(
               elevation: 10,
               child: Text(
-                "User Website : " + user.website.toString(),
+                "Website : " + user.website.toString(),
                 style: TextStyle(fontSize: 20),
               ),
             ),
