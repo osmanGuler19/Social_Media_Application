@@ -34,22 +34,30 @@ class HomePage extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             } else {
-              return LazyLoadListViewBuilder(
-                  loadMore: postViewModel.getPost,
-                  itemBuilder: (context, index) {
-                    final post_vm = postViewModel.currentPostList[index];
-                    return FeedWidget(
-                      userImagePath:
-                          "assets/images/user_${post_vm.userId}.jpeg",
-                      userName: "User",
-                      userPost: "${postViewModel.currentPostList[index].body}",
-                    );
-                  },
-                  loadingWidget: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  getListLength: postViewModel.getPostsLength,
-                  noMoreItems: postViewModel.isLast());
+              return RefreshIndicator(
+                onRefresh: () async {
+                  await postViewModel.resetPostList();
+                },
+                child: LazyLoadListViewBuilder(
+                    loadMore: postViewModel.getPost,
+                    itemBuilder: (context, index) {
+                      final post_vm = postViewModel.currentPostList[index];
+                      final user_vm = postViewModel.currentPostsUser[index];
+                      return FeedWidget(
+                        userImagePath:
+                            "assets/images/user_${post_vm.userId}.jpeg",
+                        userName: "${user_vm.name}",
+                        userPost:
+                            "${postViewModel.currentPostList[index].body}",
+                        userId: post_vm.userId!,
+                      );
+                    },
+                    loadingWidget: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    getListLength: postViewModel.getPostsLength,
+                    noMoreItems: postViewModel.isLast()),
+              );
             }
           },
         ));

@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import '../viewmodel/user_viewmodel.dart';
+import 'package:provider/provider.dart';
 
 class FeedWidget extends StatelessWidget {
   final String userImagePath;
   final String userName;
   final String userPost;
+  final int userId;
   const FeedWidget(
       {Key? key,
       required this.userImagePath,
       required this.userName,
-      required this.userPost})
+      required this.userPost,
+      required this.userId})
       : super(key: key);
 
   @override
@@ -20,9 +24,23 @@ class FeedWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: ListTile(
-        leading: CircleAvatar(
-          backgroundImage: AssetImage(
-            userImagePath,
+        onTap: () {
+          Fluttertoast.showToast(
+            msg: "Tap on $userName",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.grey,
+            textColor: Colors.white,
+            fontSize: 16.0,
+          );
+        },
+        leading: GestureDetector(
+          onTap: () {},
+          child: CircleAvatar(
+            backgroundImage: AssetImage(
+              userImagePath,
+            ),
           ),
         ),
         title: Text(userName),
